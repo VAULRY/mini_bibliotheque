@@ -18,7 +18,12 @@ class LivreForm extends AbstractType
             ->add('annee')
             ->add('auteur', EntityType::class, [
                 'class' => Auteur::class,
-                'choice_label' => 'id',
+                // 'choice_label' => 'id',
+                'choice_label' => function (Auteur $auteur) {
+        return $auteur->getNom() . ' ' . $auteur->getPrenom();
+    },
+    'placeholder' => 'Sélectionner un auteur',
+
             ])
         ;
     }

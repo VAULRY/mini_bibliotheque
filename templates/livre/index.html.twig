@@ -3,13 +3,11 @@
 {% block body %}
 <div class="d-flex justify-content-between align-items-center mb-4">
  <h1>Liste des Livres</h1>
- <a href="{{ path('app_livre_new') }}" class="btn btn-success">Ajouter un
-livre</a>
+ <a href="{{ path('app_livre_new') }}" class="btn btn-success">Ajouter un livre</a>
 </div>
 {% if livres is empty %}
  <div class="alert alert-info">
- Aucun livre trouvé. <a href="{{ path('app_livre_new') }}">Ajoutez le
-premier livre</a>.
+ Aucun livre trouvé. <a href="{{ path('app_livre_new') }}">Ajoutez le premier livre</a>.
  </div>
 {% else %}
  <div class="table-responsive">
