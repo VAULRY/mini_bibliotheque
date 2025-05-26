@@ -11,13 +11,21 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/livre')]
 class LivreController extends AbstractController
 {
- #[Route('/', name: 'app_livre_index', methods: ['GET'])]
- public function index(LivreRepository $livreRepository): Response
- {
- return $this->render('livre/index.html.twig', [
- 'livres' => $livreRepository->findAll(),
- ]);
- }
+#[Route('/', name: 'app_livre_index', methods: ['GET'])]
+public function index(Request $request, LivreRepository $livreRepository):
+Response
+{
+$search = $request->query->get('search', '');
+if ($search) {
+$livres = $livreRepository->findBySearchTerm($search);
+} else {
+$livres = $livreRepository->findAll();
+}
+return $this->render('livre/index.html.twig', [
+'livres' => $livres,
+'search' => $search,
+]);
+}
  #[Route('/new', name: 'app_livre_new', methods: ['GET', 'POST'])]
  public function new(Request $request, EntityManagerInterface
 $entityManager): Response
@@ -70,4 +78,7 @@ EntityManagerInterface $entityManager): Response
  }
  return $this->redirectToRoute('app_livre_index');
  }
+ 
+
+ 
 }

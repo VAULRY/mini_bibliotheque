@@ -24,6 +24,7 @@ class AppFixtures extends Fixture
             $manager->persist($auteur);
 
             // Ajout d'un livre associé à cet auteur
+            
             $livre = new Livre();
             $livre->setTitre("Livre de " . $data['nom']);
             $livre->setAnnee(rand(1800, 1900));
